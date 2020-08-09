@@ -1,0 +1,233 @@
+<!DOCTYPE html>  
+<html>  
+    <head>  
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./bootstrap4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/main.css"/>
+        <style>
+            body {
+                -webkit-user-select:none;
+                -moz-user-select:none;
+                -o-user-select:none;
+                user-select:none;
+            }
+</style>
+        <script src="https://kit.fontawesome.com/5cfb075a99.js" crossorigin="anonymous"></script>
+        <link rel="icon" type="image/png" href="https://www.robotemi.com/favicon.ico">
+        <meta property="og:image" content="https://1ufbh52bd9hr2gjw2p1tgwng-wpengine.netdna-ssl.com/wp-content/uploads/2019/10/temib2bposter-500x280.jpg">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="http://cgutemi.nctu.me">
+        <meta name="author" content="CGUIM.Temi.Dev">
+        <meta property="og:description" content=
+        "ROS-based機器人創新應用提案 > TAIROA台灣智慧自動化與機器人協會 Taiwan Automation Intelligence and Robotics Association
+        > 博鈞科技 Mobisnet + TEMI 
+        > 長庚大學資訊管理學系 Chang Gung University Department of Information Management
+        > 義大世界購物廣場 E-DA OUTLET MALL">
+
+        <title>TEMI Admin</title>
+        <meta property="og:title" content="TEMI Admin"/>
+
+    </head>
+      
+    <body>
+
+        <script src="./js/header.js"></script>
+        
+        <script src="./js/jquery-3.5.1.slim.min.js"></script>
+        <script src="./js/popper.min.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
+        
+
+        <script src="/socket.io/socket.io.js"></script>
+
+        
+        <br><br><br>
+        <!--https://codepen.io/bajabenedik/pen/abdwJXR?editors=1100-->
+        <div class="outer-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>S/N</th>
+                        <th>Status</th>
+                        <th>Update Time</th>
+                        <th>MAC Addr</th>
+                        <th>SSID</th>
+                        <th>IP</th>
+                        <th>RSSI (dbm)</th>
+                        <th>Battery</th>
+                        <th>Charging</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="priority-300">
+                        <td id="temi_data1_SN">00119462526</td>
+                        <td id="temi_data1_Status"><i class="fas fa-spinner fa-pulse" style="color:white"></i></td>
+                        <td id="temi_data1_Time"></td>
+                        <td id="temi_data1_MAC"></td>
+                        <td id="temi_data1_SSID"></td>
+                        <td id="temi_data1_IP"></td>
+                        <td id="temi_data1_RSSI"></td>
+                        <td id="temi_data1_BatteryLevel"></td>
+                        <td id="temi_data1_Charging"></td>
+                    </tr>
+    
+                    <tr class="priority-600">
+                        <td id="temi_data2_SN">00119462519</td>
+                        <td id="temi_data2_Status"><i class="fas fa-spinner fa-pulse" style="color:white"></i></td>
+                        <td id="temi_data2_Time"></td>
+                        <td id="temi_data2_MAC"></td>
+                        <td id="temi_data2_SSID"></td>
+                        <td id="temi_data2_IP"></td>
+                        <td id="temi_data2_RSSI"></td>
+                        <td id="temi_data2_BatteryLevel"></td>
+                        <td id="temi_data2_Charging"></td>
+                    </tr>
+                </tbody> 
+            </table>
+        </div>
+
+        <br><br>
+    
+        <div class="outer-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th><a href="http://www.tairoa.org.tw/column/column.aspx?column_id=3773&column_type_id=5" target="_blank" style="color:white; text-decoration:none" 
+                        onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >比賽連結</a></th>
+                        <th><a href="http://www.edamall.com.tw/" target="_blank" style="color:white; text-decoration:none"
+                        onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >義大世界購物廣場</a></th>
+                        <th><a href="https://www.robotemi.com/" target="_blank" style="color:white; text-decoration:none"
+                        onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >TEMI Official</a></th>
+                        <th><a href="https://github.com/robotemi/sdk" target="_blank" style="color:white; text-decoration:none"
+                        onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >TEMI SDK Github Repo</a></th>
+                        <th><a href="https://github.com/jason19970210/Temi-ROS" target="_blank" style="color:white; text-decoration:none"
+                        onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >Team Github Repo</a></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+
+
+        <!--https://proto.io/freebies/onoff/-->
+        <script>
+            var clock=0
+            var temi1_status=true
+            var temi2_status=true
+            var key1 = "00119462526"
+            var key2 = "00119462519"
+
+            $(function(){
+                var socket = io.connect();
+                socket.on('mqtt', function(data){
+                    //console.log(data.msg)
+                    var json = JSON.parse(data.msg)
+                    //console.log(json)
+
+                    // Not using this
+                    // https://jsfiddle.net/RajReddy/nfzkwLj1/
+
+                    clock++
+                    if(clock==7){
+                        if(temi1_status){ // temi1 offline status
+                            //document.getElementById('temi_data1_SN').innerHTML = key1
+                            document.getElementById('temi_data1_Status').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i><font color="#ff7a7a">Offline</font>'
+                           
+                            var url_key1 = "http://cgutemi.nctu.me/offline/" + key1
+                            //document.getElementById('temi_data1_Time').innerHTML = Date().toString().slice(0,24)
+                            fetch(url_key1)
+                                .then((response)=>{
+                                    return response.json()
+                                }).then((json)=>{
+                                    //console.log(json, typeof(json))
+                                    json = JSON.parse(json)
+                                    document.getElementById('temi_data1_Time').innerHTML = json.Time
+                                    document.getElementById('temi_data1_MAC').innerHTML = json.MAC
+                                    document.getElementById('temi_data1_SSID').innerHTML = json.SSID
+                                    document.getElementById('temi_data1_IP').innerHTML = json.IP
+                                    document.getElementById('temi_data1_RSSI').innerHTML = json.RSSI
+                                    document.getElementById('temi_data1_BatteryLevel').innerHTML = json.BatteryLevel
+                                    if(json.isCharging == "true"){
+                                        document.getElementById('temi_data1_Charging').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i>'
+                                    } else {
+                                        document.getElementById('temi_data1_Charging').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i>'
+                                    }
+
+                                })
+                        }
+
+                        if(temi2_status){ // temi2 offline status
+                            //document.getElementById('temi_data2_SN').innerHTML = key2
+                            document.getElementById('temi_data2_Status').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i><font color="#ff7a7a")>Offline</font>'
+                            var url_key2 = "http://cgutemi.nctu.me/offline/" + key2
+                            //console.log(url_key2)
+                            fetch(url_key2)
+                                .then((response)=>{
+                                    return response.json()
+                                }).then((json)=>{
+                                    //console.log(json, typeof(json))
+                                    json = JSON.parse(json)
+                                    document.getElementById('temi_data2_Time').innerHTML = json.Time
+                                    document.getElementById('temi_data2_MAC').innerHTML = json.MAC
+                                    document.getElementById('temi_data2_SSID').innerHTML = json.SSID
+                                    document.getElementById('temi_data2_IP').innerHTML = json.IP
+                                    document.getElementById('temi_data2_RSSI').innerHTML = json.RSSI
+                                    document.getElementById('temi_data2_BatteryLevel').innerHTML = json.BatteryLevel
+                                    if(json.isCharging == "true"){
+                                        document.getElementById('temi_data2_Charging').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i>'
+                                    } else {
+                                        document.getElementById('temi_data2_Charging').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i>'
+                                    }
+
+                                })
+                        }
+                        clock=0
+                        temi1_status=true
+                        temi2_status=true
+                    }
+                    if (Object.keys(json)[0] == key1){
+                        b1=false
+                        //document.getElementById('temi_data1').innerHTML = json[key1]  //["SN"]
+                        //document.getElementById('temi_data1_SN').innerHTML = key1
+                        document.getElementById('temi_data1_Status').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i><font color="#40c587">Online </font>'
+                        document.getElementById('temi_data1_Time').innerHTML = json[key1]["Time"]
+                        document.getElementById('temi_data1_MAC').innerHTML = json[key1]["MAC"]
+                        document.getElementById('temi_data1_SSID').innerHTML = json[key1]["SSID"]
+                        document.getElementById('temi_data1_IP').innerHTML = json[key1]["IP"]
+                        document.getElementById('temi_data1_RSSI').innerHTML = json[key1]["RSSI"]
+                        document.getElementById('temi_data1_BatteryLevel').innerHTML = json[key1]["BatteryLevel"]
+                        if(json[key1]["isCharging"] == "true"){
+                            document.getElementById('temi_data1_Charging').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i>'
+                        } else {
+                            document.getElementById('temi_data1_Charging').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i>'
+                        }
+                        //document.getElementById('temi_data1_Charging').innerHTML = json[key1]["isCharging"]
+                        //oldString = json[key1]  
+                    } else if (Object.keys(json) == key2) {
+                        b2=false
+                        //document.getElementById('temi_data2').innerHTML = json[key2]    
+                        //document.getElementById('temi_data2_SN').innerHTML = key2
+                        document.getElementById('temi_data2_Status').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i><font color="#40c587">Online </font>'
+                        document.getElementById('temi_data2_Time').innerHTML = json[key2]["Time"]
+                        document.getElementById('temi_data2_MAC').innerHTML = json[key2]["MAC"]
+                        document.getElementById('temi_data2_SSID').innerHTML = json[key2]["SSID"]
+                        document.getElementById('temi_data2_IP').innerHTML = json[key2]["IP"]
+                        document.getElementById('temi_data2_RSSI').innerHTML = json[key2]["RSSI"]
+                        document.getElementById('temi_data2_BatteryLevel').innerHTML = json[key2]["BatteryLevel"]
+                        if(json[key2]["isCharging"] == "true"){
+                            document.getElementById('temi_data2_Charging').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i>'
+                        } else {
+                            document.getElementById('temi_data2_Charging').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i>'
+                        }
+                        //document.getElementById('temi_data2_Charging').innerHTML = json[key2]["isCharging"]
+                    }
+                })    
+            })
+
+        </script> 
+    </body>
+
+
+        
+</html>  

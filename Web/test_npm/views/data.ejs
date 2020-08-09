@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>簡單實作 EJS</title>
+    </head>
+    <body>
+        <h1><%= game %></h1>
+        <%- category %>
+        <ul>
+            <% for(var i=0; i<characters.length; i++) { %>
+            <li><%= characters[i] %></li>
+            <% } %>
+        </ul>
+    </body>
+</html>

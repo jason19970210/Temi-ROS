@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+/* https://codepen.io/bajabenedik/pen/abdwJXR?editors=1100 */
+
+/* START CSS VARIABLES */
+:root {
+  --body-background: #1c223b;
+  --body-text: #ffffff;
+  /*
+  --container-background: #273349;
+  */
+  --container-background: rgba(39,51,73, 0.5);
+  --table-background: #1c223b;
+  --table-background-hover: #151b31;
+  --table-text: #e2e2e2;
+  --priority-200: #ff7a7a;
+  --priority-300: #4480e7;
+  --priority-600: #40c587;
+}
+/* END CSS VARIABLES */
+
+
+body {
+  background: url('../assets/bg.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+p {
+    color: white;
+}
+
+
+
+/* START OUTER CONTAINER STYLES */
+.outer-container {
+  background-color: var(--container-background);
+  border-radius: 0.625rem;
+  box-shadow: 0 5px 10px rgba(12,16,31,0.4);
+  padding: 1rem; /*6.25rem*/   /* Table Container Height  */
+  margin: auto;
+  width: 100%;
+  max-width: 72rem; /* 62.6 */
+}
+
+
+/* Start Table Styles */
+table {
+  color: var(--table-text);
+  font-size: 0.875rem;
+  padding: 0.625rem;
+  width: 100%;
+}
+table th {
+  font-size: 1rem;
+}
+table th, table td {
+  padding: 0.9375rem;
+  text-align: center;
+}
+table tbody tr {
+  background-color: var(--table-background);
+}
+table tbody tr:hover {
+  background-color: var(--table-background-hover);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+table tbody tr td:first-of-type {
+  border-top-left-radius: 0.3125rem;
+  border-bottom-left-radius: 0.3125rem;
+}
+table tbody tr td:last-of-type {
+  border-top-right-radius: 0.3125rem;
+  border-bottom-right-radius: 0.3125rem;
+  text-align: center;
+}
+table tbody tr.priority-200 td:first-of-type {
+  border-left: 0.3125rem solid var(--priority-200);
+}
+table tbody tr.priority-300 td:first-of-type {
+  border-left: 0.3125rem solid var(--priority-300);
+}
+table tbody tr.priority-600 td:first-of-type {
+  border-left: 0.3125rem solid var(--priority-600);
+}
+table tbody tr td .fa-circle {
+  transform: scale(0.7);
+}
+
+/*
+table tbody tr.priority-200 td .fa-circle {
+  color: var(--priority-200);
+}
+table tbody tr.priority-300 td .fa-circle {
+  color: var(--priority-300);
+}
+table tbody tr.priority-600 td .fa-circle {
+  color: var(--priority-600);
+}
+table tbody tr:hover .delete-btn {
+  opacity: 1;
+}*/

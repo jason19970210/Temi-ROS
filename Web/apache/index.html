@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Apache Test</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css">
+
+</head>
+
+
+<body>
+    <h1>Data</h1>
+
+    <p>
+        View Count : <strong id = 'viewCount'>0</strong>
+    </p>
+
+
+    <script>
+        function startLiuveUpdate () {
+            const textViewCount = document.getElementById('viewCount');
+
+            setInterval(function () {
+                fetch('viewcount.php').then(function(response){
+                    return response.json();
+                }).then (function (data) {
+                    textViewCount.textContent = data.viewCount;
+                }).catch(function (errro){
+                    console.log(error)
+                })
+            }, 2000)
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            startLiuveUpdate()
+        });
+    </script>
+
+</body>
