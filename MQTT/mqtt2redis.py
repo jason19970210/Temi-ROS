@@ -5,7 +5,8 @@ import redis
 
 ## Redis Connection
 
-r = redis.StrictRedis(host='120.126.18.94', port=6379, db=0)
+r0 = redis.StrictRedis(host='120.126.18.94', port=6379, db=0)
+r1 = redis.StrictRedis(host='120.126.18.94', port=6379, db=1)
 #r.set("key", "value")
 #print(r.get("key"))
 #time.sleep(20)
@@ -29,13 +30,13 @@ def on_message(client, userdata, msg):
     message = msg.payload.decode("utf-8")
     #print(msg.topic + "\n" + message)
     params = json.loads(message)
-    #print(type(params)) #> <class 'dict'>
+    #print(params) #> <class 'dict'>
     for i in params:
-        #print(i, params[i])
+        #print(params[i])
         value = json.dumps(params[i])
-        r.set(i, value)
-        #print(i, params[i])
-        #print("Set Record")
+        datetime = json.dumps(params[i]['Time'])[:-2].replace(":", ".").replace("\"", " ")
+        r0.set(i, value)
+        r1.set(i+":"+datetime, value)
 
 
 # 連線設定
@@ -52,7 +53,7 @@ client.on_message = on_message
 # client.username_pw_set("try","xxxx")
 
 # 設定連線資訊(IP, Port, 連線時間)
-client.connect("120.126.18.94", 1883, 60)
+client.connect("120.126.18.94", 1883)
 
 # 開始連線，執行設定的動作和處理重新連線問題
 # 也可以手動使用其他loop函式來進行連接
