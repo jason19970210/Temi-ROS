@@ -13,13 +13,13 @@ var header = "<!-- Navigation -->\
                             </a>\
                         </li>\
                         <li class='nav-item'>\
-                            <a class='nav-link' target='_blank' href='http://120.126.18.94:8085'>Redis Console</a>\
+                            <a class='nav-link' href='/redis_console.html'>Redis Console</a>\
                         </li>\
                         <li class='nav-item'>\
-                            <a class='nav-link' href='#'>Services</a>\
+                            <a class='nav-link' href='#'>Brand Guide</a>\
                         </li>\
                         <li class='nav-item'>\
-                            <a class='nav-link' href='#'>Contact</a>\
+                            <a class='nav-link' href='#'>Promotion & Activity</a>\
                         </li>\
                     </ul>\
                 </div>\

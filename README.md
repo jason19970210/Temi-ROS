@@ -5,7 +5,7 @@
 - Install ADB (Android Debug Bridge)
     - Windows
         1. Download SDK Platform-Tools
-    - macOS
+    - MacOS
         - Via `Homebrew`
             1. Make sure brew is installed
             2. `$ brew cask install android-platform-tools`

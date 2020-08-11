@@ -100,9 +100,9 @@
                         <th><a href="https://www.robotemi.com/" target="_blank" style="color:white; text-decoration:none"
                         onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >TEMI Official</a></th>
                         <th><a href="https://github.com/robotemi/sdk" target="_blank" style="color:white; text-decoration:none"
-                        onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >TEMI SDK Github Repo</a></th>
+                        onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >TEMI SDK GitHub Repo</a></th>
                         <th><a href="https://github.com/jason19970210/Temi-ROS" target="_blank" style="color:white; text-decoration:none"
-                        onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >Team Github Repo</a></th>
+                        onMouseOver="this.style.color='#40c587'"   onMouseOut="this.style.color='#fff'" >Team GitHub Repo</a></th>
                     </tr>
                 </thead>
             </table>
@@ -113,10 +113,67 @@
         <!--https://proto.io/freebies/onoff/-->
         <script>
             var clock=0
+
+            // True statement means service offline
+            // False statement means service online
             var temi1_status=true
             var temi2_status=true
             var key1 = "00119462526"
             var key2 = "00119462519"
+
+            var tmpVar = setInterval(myTimer, 1000);
+
+            function myTimer() {
+                if(temi1_status){
+                    document.getElementById('temi_data1_Status').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i><font color="#ff7a7a">Offline</font>'
+
+                    var url_key1 = "http://cgutemi.nctu.me/offline/" + key1
+                    fetch(url_key1).then((response)=>{
+                        return response.json()
+                    }).then((json)=>{
+                        console.log(json, typeof(json))
+                        json = JSON.parse(json)
+                        document.getElementById('temi_data1_Time').innerHTML = json.Time
+                        document.getElementById('temi_data1_MAC').innerHTML = json.MAC
+                        document.getElementById('temi_data1_SSID').innerHTML = json.SSID
+                        document.getElementById('temi_data1_IP').innerHTML = json.IP
+                        document.getElementById('temi_data1_RSSI').innerHTML = json.RSSI
+                        document.getElementById('temi_data1_BatteryLevel').innerHTML = json.BatteryLevel
+                        if(json.isCharging == "true"){
+                            document.getElementById('temi_data1_Charging').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i>'
+                        } else {
+                            document.getElementById('temi_data1_Charging').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i>'
+                        }
+
+                    })    
+                }
+                if(temi2_status){ // temi2 offline status
+                    //document.getElementById('temi_data2_SN').innerHTML = key2
+                    document.getElementById('temi_data2_Status').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i><font color="#ff7a7a")>Offline</font>'
+                    var url_key2 = "http://cgutemi.nctu.me/offline/" + key2
+                    //console.log(url_key2)
+                    fetch(url_key2).then((response)=>{
+                        return response.json()
+                    }).then((json)=>{
+                        //console.log(json, typeof(json))
+                        json = JSON.parse(json)
+                        document.getElementById('temi_data2_Time').innerHTML = json.Time
+                        document.getElementById('temi_data2_MAC').innerHTML = json.MAC
+                        document.getElementById('temi_data2_SSID').innerHTML = json.SSID
+                        document.getElementById('temi_data2_IP').innerHTML = json.IP
+                        document.getElementById('temi_data2_RSSI').innerHTML = json.RSSI
+                        document.getElementById('temi_data2_BatteryLevel').innerHTML = json.BatteryLevel
+                        if(json.isCharging == "true"){
+                            document.getElementById('temi_data2_Charging').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i>'
+                        } else {
+                            document.getElementById('temi_data2_Charging').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i>'
+                        }
+
+                    })
+                }
+            } 
+            
+
 
             $(function(){
                 var socket = io.connect();
@@ -187,7 +244,7 @@
                         temi2_status=true
                     }
                     if (Object.keys(json)[0] == key1){
-                        b1=false
+                        temi1_status=false
                         //document.getElementById('temi_data1').innerHTML = json[key1]  //["SN"]
                         //document.getElementById('temi_data1_SN').innerHTML = key1
                         document.getElementById('temi_data1_Status').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i><font color="#40c587">Online </font>'
@@ -205,7 +262,7 @@
                         //document.getElementById('temi_data1_Charging').innerHTML = json[key1]["isCharging"]
                         //oldString = json[key1]  
                     } else if (Object.keys(json) == key2) {
-                        b2=false
+                        temi2_status=false
                         //document.getElementById('temi_data2').innerHTML = json[key2]    
                         //document.getElementById('temi_data2_SN').innerHTML = key2
                         document.getElementById('temi_data2_Status').innerHTML = '<i class="fas fa-circle" style="color:#40c587"></i><font color="#40c587">Online </font>'
