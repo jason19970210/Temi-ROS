@@ -41,8 +41,8 @@
     - Key : S/N
         - Value : Data JSON Format
 
-    | Time | Device_ID | IP_Addr | MAC_Addr | Robox_OS | Launcher_OS | S/N |    Battery_Info | Charging_Status |   
-    | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
+    | S/N | Status | Time | MAC_Addr | SSID | IP Addr | RSSI | Battery_Info | Charging_Status |   
+    | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
     |  |  |  |  |  |  |  |  | Boolean | 
 
 - Table [1] : Robot Status Log
