@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         activityManager.getMemoryInfo(memoryInfo);
         Runtime runtime = Runtime.getRuntime();
 
-        Long convert = 1048576L;
+        Long convert = 1048576L; // convert Long value to MB for human reading
         String totalMem = String.valueOf(memoryInfo.totalMem / convert);
         String avaiMem = String.valueOf(memoryInfo.availMem / convert);
         String usedMem = String.valueOf((memoryInfo.totalMem - memoryInfo.availMem)/convert);
@@ -303,7 +303,6 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
             return capitalize(manufacturer) + " " + model;
         }
     }
-
     private static String capitalize(String s) {
         if (s == null || s.length() == 0) {
             return "";
@@ -315,6 +314,8 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
             return Character.toUpperCase(first) + s.substring(1);
         }
     }
+
+    // ======== end of `getDeviceName()`
 
     public static String getSerialNumber(){
         String serialNumber = robot.getSerialNumber();
