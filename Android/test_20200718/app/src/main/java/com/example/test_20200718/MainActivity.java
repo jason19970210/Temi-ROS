@@ -11,11 +11,14 @@ import java.util.List;
 import java.util.Collections;
 import java.util.Calendar;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
+import android.os.MemoryFile;
 import android.util.Log;
 import android.os.Handler;
 import android.net.wifi.WifiInfo;
@@ -33,6 +36,7 @@ import com.robotemi.sdk.BatteryData;
 import com.robotemi.sdk.Robot;
 import com.robotemi.sdk.listeners.OnRobotReadyListener;
 
+// NodeJS Port : 3000
 // MQTT Port : 1883
 // Redis Port : 6379
 // Redis Webadmin Port : 8085
@@ -41,14 +45,15 @@ import com.robotemi.sdk.listeners.OnRobotReadyListener;
 public class MainActivity extends AppCompatActivity implements OnRobotReadyListener {
 
     private static final String TAG = "data";
+    private static final String TAG_Life = "life_cycle";
     private static Robot robot;
 
     private static Context context;
 
-
     @Override
     protected void onStart(){
         super.onStart();
+        Log.d(TAG_Life, "onStart() function");
         robot.addOnRobotReadyListener(this);
         robot.showTopBar();
     }
@@ -56,11 +61,19 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
     @Override
     protected void onStop(){
         super.onStop();
+        Log.d(TAG_Life, "onStop() function");
         robot.removeOnRobotReadyListener(this);
     }
 
     @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.d(TAG_Life, "onDestroy() function");
+    }
+
+    @Override
     public void onRobotReady(boolean isReady) {
+        Log.d(TAG_Life, "onRobotReady() function");
         if (isReady) {
             try {
                 final ActivityInfo activityInfo = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
@@ -76,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(TAG_Life, "onCreate() function");
 
         // Static way to get 'Context' on Android?
         // https://bibby1101.pixnet.net/blog/post/62556473-%3Candroid%3E-static-way-to-get-%27context%27-on-android%3F
@@ -84,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
         Log.d("Name", "Name");
         Log.d("Name", getDeviceName());
-
 
 
         // Main
@@ -146,11 +159,11 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         String ip = getLocalIpAddress();
         String ssid = WifiUtils.getSSID(MainActivity.context);
         String rssi = WifiUtils.getRssi(MainActivity.context);
-
+        String memoryUsage = getUsedMemorySize();
         int batteryPercentage = getbatteryInfo().batteryLevel;
         boolean isCharging = getbatteryInfo().isCharging;
         //String msg = String.format("{\"%s\":\"{%s, %s, %s, %s, %d%%, %s}\"}", serialNumber, serialNumber, mac, currentTime, ip, batteryPercentage, isCharging);
-        String msg = String.format("{\"%s\":{\"SN\":\"%s\", \"Time\":\"%s\", \"MAC\":\"%s\", \"SSID\":\"%s\", \"IP\":\"%s\", \"RSSI\":\"%s\", \"BatteryLevel\":\"%d%%\", \"isCharging\":\"%s\"}}", serialNumber, serialNumber, currentTime.replace("GMT+08:00 2020", ""), mac, ssid.replace("\"", ""), ip, rssi, batteryPercentage, isCharging);
+        String msg = String.format("{\"%s\":{\"SN\":\"%s\", \"Time\":\"%s\", \"MAC\":\"%s\", \"SSID\":\"%s\", \"IP\":\"%s\", \"RSSI\":\"%s\", \"BatteryLevel\":\"%d%%\", \"isCharging\":\"%s\", \"Mem\":\"%s\"}}", serialNumber, serialNumber, currentTime.replace("GMT+08:00 2020", ""), mac, ssid.replace("\"", ""), ip, rssi, batteryPercentage, isCharging, memoryUsage);
         //Log.d(TAG, msg);
         publishUtilTOMqtt(msg);
     }
@@ -197,7 +210,9 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         MemoryPersistence persistence = new MemoryPersistence();
         String topic = "test/sub_topic";
         //String content = currentTime.toString();
-        int qos = 2;
+        // Setting mqtt connection quaility
+        // https://swf.com.tw/?p=1015
+        int qos = 0;
 
         Log.d(TAG, "message: " + content);
 
@@ -225,6 +240,57 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
             Log.d(TAG, "excep " + me);
             me.printStackTrace();
         }
+    }
+
+    public static String getUsedMemorySize() {
+        /*
+        long freeSize = 0L;
+        long totalSize = 0L;
+        long usedSize = -1L;
+        try {
+            Runtime info = Runtime.getRuntime();
+            freeSize = info.freeMemory();
+            totalSize = info.totalMemory();
+            Log.d("mmm", String.valueOf(totalSize));
+            usedSize = totalSize - freeSize;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Long.toString(usedSize);
+        */
+
+        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(ACTIVITY_SERVICE);
+        activityManager.getMemoryInfo(memoryInfo);
+        Runtime runtime = Runtime.getRuntime();
+
+        Long convert = 1048576L;
+        String totalMem = String.valueOf(memoryInfo.totalMem / convert);
+        String avaiMem = String.valueOf(memoryInfo.availMem / convert);
+        String usedMem = String.valueOf((memoryInfo.totalMem - memoryInfo.availMem)/convert);
+        String runtimeMaxMem = String.valueOf(runtime.maxMemory() / convert);
+        String runtimeTotalMem = String.valueOf(runtime.totalMemory() / convert);
+        String runtimeFreeMem = String.valueOf(runtime.freeMemory()/ convert);
+        String runtimeUsedMem =  String.valueOf((runtime.totalMemory() - runtime.freeMemory())/convert);
+
+        Log.d("mmm", "totalMem = " + totalMem + " MB");
+        Log.d("mmm", "avaiMem = " + avaiMem + " MB");
+        Log.d("mmm", "usedMem = " + usedMem + " MB");
+        Log.d("mmm", "runtimeMaxMem = " + runtimeMaxMem + " MB");
+        Log.d("mmm", "runtimeTotalMem = " + runtimeTotalMem + " MB");
+        Log.d("mmm", "runtimeFreeMem = " + runtimeFreeMem + " MB");
+        Log.d("mmm", "runtimeUsedMem = " + runtimeUsedMem + " MB");
+
+        /*
+        08-11 21:48:03.565 D/mmm: totalMem = 2109140992
+        08-11 21:48:03.565 D/mmm: avaiMem = 1186332672
+        08-11 21:48:03.565 D/mmm: runtimeMaxMem = 201326592
+        08-11 21:48:03.566 D/mmm: runtimeTotalMem = 3134812
+        08-11 21:48:03.566 D/mmm: runtimeFreeMem = 952020
+        */
+
+        return "123";
+
     }
 
 
