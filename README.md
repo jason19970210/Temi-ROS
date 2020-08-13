@@ -3,6 +3,72 @@
 ## Project Web & System Monitor
 - http://cgutemi.nctu.me
 
+
+## Environment & Tools
+- Ubuntu 18.04
+    - MQTT Broker
+    - Redis DB Server
+    - Redis Web GUI Console
+    - NodeJS
+    - Python
+        - Sub MQTT & Write Data into Reids DB
+- Temi Robot
+    - Java
+        - MQTT Client
+
+## Installation
+### Ubuntu
+- MQTT
+    - Broker
+        ```zsh
+        $ sudo apt update -y && sudo apt install -y mosquitto
+        ```
+        - Enable Service
+            ```zsh
+            $ sudo systemctl enable mosquitto
+            ```
+    - Client
+        ```zsh
+        $ sudo apt update -y && sudo apt install -y mosquitto-clients
+        ```
+- Redis
+    ```zsh
+    $ sudo apt update -y && sudo apt install redis-server -y
+    ```
+
+    - Enable Service
+        ```zsh
+        $ sudo systemctl enable redis-server.service
+        ```
+    - Config
+        ```zsh
+        $ sudo vim /etc/redis/redis.conf
+        ```
+        ```
+        bind 0.0.0.0
+        # port (default 6379)
+        # requirepass <password>
+        stop-writes-on-bgsave-error no
+        ```
+
+- NoeJS
+    - Node & NPM
+        ```zsh
+        $ sudo apt update -y && sudo apt install nodejs -y
+        ```
+- Python
+    - Python v2.7
+        ```zsh
+        $ sudo apt install python -y
+        ```
+    - Python v3.6+
+        - MQTT Client
+            ```zsh
+            $ pip3 install 
+            ```
+
+
+
 ## Connect to Temi
 - Install Android Studio
 - Install ADB (Android Debug Bridge)
@@ -188,3 +254,12 @@ public static void publishUtilTOMqtt(String content){ // Void function without r
 
 ## Domain Name
 - Apply from NCTU free domain : https://nctu.me/
+
+
+
+
+
+### Ref
+[1] https://oranwind.org/-edge-zai-ubuntu-an-zhuang-mosquitto-mqtt-broker-part-2/  
+[2] https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04  
+[3] https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-20-04
