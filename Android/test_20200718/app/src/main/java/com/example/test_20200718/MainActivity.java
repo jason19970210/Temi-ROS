@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
     public static void publishUtilTOMqtt(String content){ // Void function without return value (ex. string, int ...
 
-        String broker = "tcp://120.126.18.94:1883";
+        String broker = "tcp://120.126.16.92:1883";
         String clientId = "Temi";
         MemoryPersistence persistence = new MemoryPersistence();
         String topic = "test/sub_topic";
