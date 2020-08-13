@@ -64,7 +64,11 @@
     - Python v3.6+
         - MQTT Client
             ```zsh
-            $ pip3 install 
+            $ pip3 install paho-mqtt
+            ```
+        - redis
+            ```zsh
+            $ pip3 install redis
             ```
 
 
