@@ -5,8 +5,8 @@ import redis
 
 ## Redis Connection
 
-r0 = redis.StrictRedis(host='120.126.18.94', port=6379, db=0)
-r1 = redis.StrictRedis(host='120.126.18.94', port=6379, db=1)
+r0 = redis.StrictRedis(host='120.126.16.92', port=6379, db=0)
+r1 = redis.StrictRedis(host='120.126.16.92', port=6379, db=1)
 #r.set("key", "value")
 #print(r.get("key"))
 #time.sleep(20)
@@ -53,7 +53,8 @@ client.on_message = on_message
 # client.username_pw_set("try","xxxx")
 
 # 設定連線資訊(IP, Port, 連線時間)
-client.connect("120.126.18.94", 1883)
+# MQTT Client
+client.connect("120.126.16.92", 1883)
 
 # 開始連線，執行設定的動作和處理重新連線問題
 # 也可以手動使用其他loop函式來進行連接

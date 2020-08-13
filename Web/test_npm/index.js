@@ -17,7 +17,8 @@ app.set('view engine', 'ejs')
 
 const web_host = '0.0.0.0'
 const web_port = 3000;
-
+const mqtt_host = 'tcp://120.126.16.92'
+const mqtt_topic = 'test/+'
 
 //app.use(function (req,res,next){
 //    console.log("at 404")
@@ -35,8 +36,7 @@ const web_port = 3000;
 
 var web_server = app.listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
 
-var mqtt_client = mqtt.connect('tcp://120.126.18.94')
-var mqtt_topic = 'test/+'
+var mqtt_client = mqtt.connect(mqtt_host)
 var sio = io.listen(web_server)
 
 mqtt_client.on('connect', function(){
@@ -68,7 +68,8 @@ sio.on('connection', function(socket){
 
 // Connect to Redis Server
 var redis_client = redis.createClient(db=0)
-    redis_client.on("error", function(error) {
+
+redis_client.on("error", function(error) {
     console.error(error);
 });
 
