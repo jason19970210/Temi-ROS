@@ -25,6 +25,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
 import android.hardware.camera2.*;
+import android.view.WindowManager;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -91,6 +92,11 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         setContentView(R.layout.activity_main);
         Log.d(TAG_Life, "onCreate() function");
 
+        // Keep the screen on
+        // https://developer.android.com/training/scheduling/wakelock
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
         // Static way to get 'Context' on Android?
         // https://bibby1101.pixnet.net/blog/post/62556473-%3Candroid%3E-static-way-to-get-%27context%27-on-android%3F
         MainActivity.context = getApplicationContext();
@@ -131,9 +137,7 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         Runnable runnable = new Runnable(){
             @Override
             public void run() {
-                // TODO Auto-generated method stub
                 // 在此處新增執行的程式碼
-
                 pubUtils();
 
                 handler.postDelayed(this, time);// time ms後執行this,即runable
