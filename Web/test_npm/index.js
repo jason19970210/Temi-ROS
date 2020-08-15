@@ -16,7 +16,7 @@ app.use(cors())    // Enable CROS 跨域請求
 app.set('view engine', 'ejs')
 
 const web_host = '0.0.0.0'
-const web_port = 3000;
+const web_port = 80; //3000
 const mqtt_host = 'tcp://120.126.16.92'
 const mqtt_topic = 'test/+'
 
@@ -70,7 +70,7 @@ sio.on('connection', function(socket){
 var redis_client = redis.createClient(db=0)
 
 redis_client.on("error", function(error) {
-    console.error(error);
+    console.error("Redis Connection Error : " + error);
 });
 
 
@@ -90,12 +90,15 @@ app.get('/offline/:sn', function(req, res){
     //console.log("/offline/" + sn + " is requested !!")
     redis_client.get(sn, (error, result) => {
         if (error) {
-            console.log(error)
+            console.log("Redis Get " + sn + " : " + error)
             throw error
         }
-        console.log('GET result ->' + result);
+        if(result == null){
+            result = sn + ' is offline'
+        }
+        console.log('GET result -> ' + result);
         res.json(result)
-        console.log(typeof(result))    
+        //console.log(typeof(result))    
     })
 })
 
