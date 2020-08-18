@@ -2,8 +2,8 @@ base = {
     'servers':[
               {'index':0,
                 'name': 'temi', 
-                'host': '120.126.18.94',
-                'port': 6379,
+                'host': '120.126.16.92',
+                'port': 55555,
                 'password': '',
                 'databases':16
               }

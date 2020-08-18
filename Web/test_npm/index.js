@@ -67,7 +67,8 @@ sio.on('connection', function(socket){
 })
 
 // Connect to Redis Server
-var redis_client = redis.createClient(db=0)
+var redis_client = redis.createClient(port=55555)
+//console.log(redis_client)
 
 redis_client.on("error", function(error) {
     console.error("Redis Connection Error : " + error);
@@ -88,6 +89,7 @@ app.get('/offline/:sn', function(req, res){
    
     const sn = req.params.sn
     //console.log("/offline/" + sn + " is requested !!")
+    redis_client.select(0)
     redis_client.get(sn, (error, result) => {
         if (error) {
             console.log("Redis Get " + sn + " : " + error)
@@ -96,10 +98,49 @@ app.get('/offline/:sn', function(req, res){
         if(result == null){
             result = sn + ' is offline'
         }
-        console.log('GET result -> ' + result);
+        //console.log('GET result -> ' + result);
         res.json(result)
         //console.log(typeof(result))    
     })
+})
+
+
+app.get('/BrandLists/:brand_type_id', function(req,res){
+    var list1 = []
+    const brand_type_id = req.params.brand_type_id
+    //console.log(brand_type_id)
+    redis_client.select(2)
+
+
+    // https://gist.github.com/atree/4557289
+    redis_client.keys('*',(error, reply) => {
+        // console.log(result) // >> array
+        var i = 0;
+        reply.forEach(function(item){
+            // console.log(item) // items in array
+            redis_client.get(item, (error, result)=>{
+                i++;
+                //console.log(result)
+                json_result = JSON.parse(result)
+                //console.log(json_result['BrandTypeID'])
+                if(json_result['BrandTypeID']==brand_type_id){
+                    //console.log(json_result['BrandTypeID'])
+                    list1.push(json_result)
+                }
+                if(i == reply.length){
+                    //console.log(list1.length)
+                    //console.log("End")
+                    var output = {}
+                    output[brand_type_id] = list1
+                    //console.log(output['1'])
+                    //console.log(list1.toString())
+                    //console.log(JSON.stringify(output))
+                    res.send(output)
+                }
+            })
+        })
+    })
+    //res.send(brand_type_id)
 })
 
 
@@ -110,7 +151,6 @@ app.post('/api', (req, res) => {
     console.log(req.query)
     res.send("OK")
 })
-
 
 
 // IMPORTANT
