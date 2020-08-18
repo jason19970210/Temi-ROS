@@ -277,4 +277,4 @@ def urlsafe_base64_encode(s):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=False, port=5001, threaded=True)
+    app.run(host="0.0.0.0", debug=False, port=5001, threaded=True, ssl_context=('ssl/certificate.crt', 'ssl/private.key'))

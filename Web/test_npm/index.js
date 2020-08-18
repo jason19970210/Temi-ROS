@@ -38,6 +38,8 @@ var credentials = { key: privateKey, cert: certificate };
 //var web_server = app.listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
 var web_server = https.createServer(credentials, app).listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
 
+var http = require('http');
+http.createServer(app).listen(80);
 
 var mqtt_client = mqtt.connect(mqtt_host)
 var sio = io.listen(web_server)
