@@ -1,7 +1,8 @@
 // Safari : Missing popper.min.js.map
 // Safari : Missing bootstrap.min.js.map
 // Solution : https://www.it-swarm.dev/zh/bootstrap-4/webpack安装bootstrap缺少popperjsmap/835338106/
-
+const https = require('https');
+const fs = require('fs');
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const mqtt = require('mqtt')
@@ -16,14 +17,10 @@ app.use(cors())    // Enable CROS 跨域請求
 app.set('view engine', 'ejs')
 
 const web_host = '0.0.0.0'
-const web_port = 80; //3000
+const web_port = 443; //3000
 const mqtt_host = 'tcp://120.126.16.92'
 const mqtt_topic = 'test/+'
 
-//app.use(function (req,res,next){
-//    console.log("at 404")
-//    res.status(404).render('404');
-//});
 
 //  Domain Management
 //  https://nctu.me/domains/
@@ -34,7 +31,13 @@ const mqtt_topic = 'test/+'
 //  開機自動化轉埠
 //  https://kawsing.gitbook.io/opensystem/docker-cong-an-zhuang-dao-ying-yong-ru-men-pian/qi-yong-host-ji-de-etcrc.local
 
-var web_server = app.listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
+var privateKey  = fs.readFileSync(__dirname + '/ssl/private.key');
+var certificate = fs.readFileSync(__dirname + '/ssl/certificate.crt');
+var credentials = { key: privateKey, cert: certificate };
+
+//var web_server = app.listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
+var web_server = https.createServer(credentials, app).listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
+
 
 var mqtt_client = mqtt.connect(mqtt_host)
 var sio = io.listen(web_server)
