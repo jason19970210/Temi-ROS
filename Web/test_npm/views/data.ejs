@@ -5,12 +5,10 @@
         <title>簡單實作 EJS</title>
     </head>
     <body>
-        <h1><%= game %></h1>
-        <%- category %>
-        <ul>
-            <% for(var i=0; i<characters.length; i++) { %>
-            <li><%= characters[i] %></li>
-            <% } %>
-        </ul>
+        <form method="get" action="/process">
+           <input id="upload" type="file" onchange="readURL(this);"  class="form-control border-0" name="file">
+            <button type="submit">Submit</button>
+        </form>
+
     </body>
 </html>

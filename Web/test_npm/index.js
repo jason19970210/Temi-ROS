@@ -15,6 +15,8 @@ app.use(express.static('www'))
 // https://github.com/expressjs/cors
 app.use(cors())    // Enable CROS 跨域請求
 app.set('view engine', 'ejs')
+app.use(bodyParser.json()) // support json encoded bodies
+//app.use(bodyParser())
 
 const web_host = '0.0.0.0'
 const web_port = 443; //3000
@@ -80,10 +82,22 @@ redis_client.on("error", function(error) {
 });
 
 
+// Routes
+
 app.get('/', (req, res) => {
     console.log("GET / ")
     res.render('index')    
 })
+
+app.get('/data', (req, res) => {
+    res.render('data')
+})
+
+
+app.get('/test1', (req, res) => {
+    res.render('test1')
+})
+
 
 
 // API
@@ -149,13 +163,33 @@ app.get('/BrandLists/:brand_type_id', function(req,res){
 })
 
 
+app.get('/process', function(req, res){
+    /*
+    (node:17523) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+    */
+    var base64ToBuffer = new Buffer.from(req.query.file, 'base64');//Convert to base64
+
+    console.log(base64ToBuffer.toString('base64'))
+    //Write your insertcode of MongoDb
+
+    //res.end("Image uploaded Successfully");
+    res.send(base64ToBuffer.toString('base64'))
+})
+
 // =====================
 // POST Method
 // Express Post Method get query from client & send response back to client
+/*
 app.post('/api', (req, res) => {
     console.log(req.query)
-    res.send("OK")
-})
+    //res.send("OK")
+    var user_id = req.query.id;
+    var token = req.query.token;
+    var geo = req.query.geo;
+
+    res.send(user_id + ' ' + token + ' ' + geo);
+    //res.send(req.query)
+})*/
 
 
 // IMPORTANT
