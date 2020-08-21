@@ -113,7 +113,7 @@
 - Getting Brand List
     - Method : GET
     - Parameters : BrandList_ID
-    - Usage : https://cgutemi.nctu.me/BrandLists/\<ID\>
+    - Usage : https://cgutemi.nctu.me/BrandLists/<ID\>
 - Getting Special Events & News
     - Method : GET
     - Parameters : Null
