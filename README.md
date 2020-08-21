@@ -1,7 +1,7 @@
 # Temi-ROS
 
 ## Project Web & System Monitor
-- http://cgutemi.nctu.me
+- https://cgutemi.nctu.me
 
 
 ## Environment & Tools
@@ -109,6 +109,16 @@
     $ adb disconnect
     ```
 
+## APIs
+- Getting Brand List
+    - Method : GET
+    - Parameters : BrandList_ID
+    - Usage : https://cgutemi.nctu.me/BrandLists/\<ID>
+- Getting Special Events & News
+    - Method : GET
+    - Parameters : Null
+    - Usage : https://cgutemi.nctu.me/events
+
 ## Database - RedisDB
 - Table [0] : Robot Utils & Status  
     - Key : S/N
@@ -174,7 +184,7 @@ Runnable runnable = new Runnable(){
 handler.postDelayed(runnable, time);// 開啟定時器,time ms後執行runnable操作
 ```
 
-#### Getting Util Info
+#### Getting Temi Util Info
 - Serial Number
 - Current Time
 - MAC Address
