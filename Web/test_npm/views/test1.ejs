@@ -5,8 +5,10 @@
         <title>簡單實作 EJS</title>
     </head>
     <body>
-        <form>
-            <input type="file" onchange="getBaseUrl();console.log('Hiiii')">
+        <form action="/process" method="POST" enctype="multipart/form-data">
+            <input type="text" name="text" id="text">
+            <input type="file" name="file" onchange="getBaseUrl();">
+            <button type="submit">Submit</button>
         </form>
         <script>
             function getBaseUrl(){
@@ -18,7 +20,13 @@
                     console.log(baseString); 
                 };
                 reader.readAsDataURL(file);
+                return baseString;
             }
+            
+            var baseString = getBaseUrl();
+            var text_data = document.getElementById('text')
+            console.log(text_data)
+
         </script>
     </body>
 </html>

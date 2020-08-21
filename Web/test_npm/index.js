@@ -1,7 +1,8 @@
 // Safari : Missing popper.min.js.map
 // Safari : Missing bootstrap.min.js.map
 // Solution : https://www.it-swarm.dev/zh/bootstrap-4/webpack安装bootstrap缺少popperjsmap/835338106/
-const https = require('https');
+
+//const https = require('https');
 const fs = require('fs');
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -9,14 +10,28 @@ const mqtt = require('mqtt')
 const redis = require('redis')
 const io = require('socket.io')
 const express = require('express')
+const https = require('https');
 const app = express()
 
+
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('www'))
 // https://github.com/expressjs/cors
 app.use(cors())    // Enable CROS 跨域請求
+app.use (function (req, res, next) {
+        if (req.secure) {
+                // request was via https, so do no special handling
+                next();
+        } else {
+                // request was via http, so redirect to https
+                res.redirect('https://' + req.headers.host + req.url);
+        }
+});
+
+
 app.set('view engine', 'ejs')
-app.use(bodyParser.json()) // support json encoded bodies
-//app.use(bodyParser())
 
 const web_host = '0.0.0.0'
 const web_port = 443; //3000
@@ -40,8 +55,8 @@ var credentials = { key: privateKey, cert: certificate };
 //var web_server = app.listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
 var web_server = https.createServer(credentials, app).listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
 
-var http = require('http');
-http.createServer(app).listen(80);
+//var http = require('http');
+//http.createServer(app).listen(80);
 
 var mqtt_client = mqtt.connect(mqtt_host)
 var sio = io.listen(web_server)
@@ -58,6 +73,7 @@ function sendData(socket){
 }
 //console.log(typeof(fake_data))
 sio.on('connection', function(socket){
+    //console.log("Connected to socket")
     
     var i;
     for(i = 0; i < 7; i++){
@@ -85,8 +101,8 @@ redis_client.on("error", function(error) {
 // Routes
 
 app.get('/', (req, res) => {
-    console.log("GET / ")
-    res.render('index')    
+    //console.log("GET / ")
+    res.render('index')   
 })
 
 app.get('/data', (req, res) => {
@@ -115,7 +131,9 @@ app.get('/offline/:sn', function(req, res){
             throw error
         }
         if(result == null){
-            result = sn + ' is offline'
+            //result = sn + ' is offline'
+            result = {}
+            result[sn] = "Offline"
         }
         //console.log('GET result -> ' + result);
         res.json(result)
@@ -129,7 +147,6 @@ app.get('/BrandLists/:brand_type_id', function(req,res){
     const brand_type_id = req.params.brand_type_id
     //console.log(brand_type_id)
     redis_client.select(2)
-
 
     // https://gist.github.com/atree/4557289
     redis_client.keys('*',(error, reply) => {
@@ -163,17 +180,33 @@ app.get('/BrandLists/:brand_type_id', function(req,res){
 })
 
 
-app.get('/process', function(req, res){
-    /*
-    (node:17523) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
-    */
-    var base64ToBuffer = new Buffer.from(req.query.file, 'base64');//Convert to base64
+app.get('/events', (req, res)=>{
 
-    console.log(base64ToBuffer.toString('base64'))
-    //Write your insertcode of MongoDb
+    var list1 = []
+    redis_client.select(3)
+    redis_client.keys('*', (error, reply)=>{
+    
+        var i = 0
+        reply.forEach(function(item){
+            redis_client.get(item, (error, result)=>{
+                i++;
+                json_result = JSON.parse(result)
+                list1.push(json_result)
 
-    //res.end("Image uploaded Successfully");
-    res.send(base64ToBuffer.toString('base64'))
+                if(i == reply.length){
+                    var output = {}
+                    output['events'] = list1
+                    res.send(output)
+                }
+            })
+        })
+    })
+})
+
+
+app.post('/process', function(req, res){
+    console.log(req.body)
+    //console.log(file)
 })
 
 // =====================

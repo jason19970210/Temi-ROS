@@ -18,7 +18,7 @@
     <meta property="og:image"
         content="https://1ufbh52bd9hr2gjw2p1tgwng-wpengine.netdna-ssl.com/wp-content/uploads/2019/10/temib2bposter-500x280.jpg">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="http://cgutemi.nctu.me">
+    <meta property="og:url" content="https://cgutemi.nctu.me">
     <meta name="author" content="CGUIM.Temi.Dev">
     <meta property="og:description" content="ROS-based機器人創新應用提案 > TAIROA台灣智慧自動化與機器人協會 Taiwan Automation Intelligence and Robotics Association
         > 博鈞科技 Mobisnet + TEMI 
@@ -158,7 +158,7 @@
                         //document.getElementById('temi_data1_SN').innerHTML = key1
                         document.getElementById('temi_data1_Status').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i><font color="#ff7a7a">Offline</font>'
 
-                        var url_key1 = "http://cgutemi.nctu.me/offline/" + key1
+                        var url_key1 = "https://cgutemi.nctu.me/offline/" + key1
                         //document.getElementById('temi_data1_Time').innerHTML = Date().toString().slice(0,24)
                         fetch(url_key1)
                             .then((response) => {
@@ -184,7 +184,7 @@
                     if (temi2_status) { // temi2 offline status
                         //document.getElementById('temi_data2_SN').innerHTML = key2
                         document.getElementById('temi_data2_Status').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i><font color="#ff7a7a")>Offline</font>'
-                        var url_key2 = "http://cgutemi.nctu.me/offline/" + key2
+                        var url_key2 = "https://cgutemi.nctu.me/offline/" + key2
                         //console.log(url_key2)
                         fetch(url_key2)
                             .then((response) => {
@@ -208,7 +208,7 @@
                     }
                     if (temi3_status) { // temi3 offline status
                         document.getElementById('temi_data3_Status').innerHTML = '<i class="fas fa-circle" style="color:#ff7a7a"></i><font color="#ff7a7a")>Offline</font>'
-                        var url_key3 = "http://cgutemi.nctu.me/offline/" + key3
+                        var url_key3 = "https://cgutemi.nctu.me/offline/" + key3
                         fetch(url_key3)
                             .then((response) => {
                                 return response.json()
