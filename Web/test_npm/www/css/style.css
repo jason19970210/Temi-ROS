@@ -1,0 +1,111 @@
+/*
+http://www.freshdesignweb.com/beautiful-registration-form-with-html5-and-css3.html
+*/
+
+.form{
+	background:transparent; width:470px; margin:0 auto; padding-left:50px; padding-top:50px;
+}
+.form fieldset{border:0px; padding:0px; margin:0px;}
+.form p.contact { font-size: 20px; margin:0px 0px 10px 0;line-height: 18px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;}
+
+.form input[type="text"] { width: 400px; }
+.form input[type="email"] { width: 400px; }
+.form input[type="password"] { width: 400px; }
+.form input.birthday{width:60px;}
+.form input.birthyear{width:120px;}
+.form label { color: #e2e2e2; font-weight:900;font-size: 17px;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;}
+.form label.month {width: 135px;}
+.form input, textarea { background-color: var(--table-background); border: 1px solid rgba(122, 192, 0, 0.15); padding: 10px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; color: #e2e2e2; font-size: 13px; -webkit-border-radius: 5px; margin-bottom: 15px; margin-top: -10px;}
+
+.btn{position:relative; left:-1%;}
+
+.test {width:400px; background-color: var(--table-background); border: 1px solid rgba(122, 192, 0, 0.15); padding: 0px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; color: #e2e2e2; font-size: 10px; -webkit-border-radius: 5px; margin-bottom: 15px; margin-top: -10px;}
+
+.choose {color: #808080;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; font-size: 13px;}
+
+::placeholder { /* CSS 3 標準 */
+  color: #808080;
+}
+
+input[type="file"] {position:relative;
+left:-4.7px; width:400px;}
+
+input[type="date"] {position:relative;
+width:196px;}
+
+input[type="time"] {position:relative;
+width:199px;}
+
+
+
+.wrap-contact100 {
+  margin:100px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: 450px;
+  height: 600px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px 37px 25px 10px;
+
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 1);
+  -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 1);
+  -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 1);
+  -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 1);
+}
+
+
+.outer-container1 {
+  background-color: var(--container-background);
+  border-radius: 0.625rem;
+  box-shadow: 0 5px 10px rgba(12,16,31,0.4);
+  padding: 15px 39px 25px 10px; /*6.25rem*/   /* Table Container Height  */
+  margin: 50px auto;
+  width: 520px;
+  max-width: 72rem; /* 62.6 */
+}
+
+
+
+.outer-container2 {
+  background-color: var(--container-background);
+  border-radius: 0.625rem;
+  box-shadow: 0 5px 10px rgba(12,16,31,0.4);
+  padding: 15px 39px 25px 10px; /*6.25rem*/   /* Table Container Height  */
+  margin: 50px auto;
+  width: 520px;
+  max-width: 72rem; /* 62.6 */
+}
+
+
+
+.form input:focus, textarea:focus { border: 1px solid #7a7a52; background-color: var(--table-background); }
+
+.form .select-style {
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -webkit-user-select: none;
+  --background-image: url(images/), 
+    -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+  background-position: center right;
+  background-repeat: no-repeat;
+  border: 0px solid #FFF;
+  color: #555;
+  font-size: inherit;
+  margin: 0;
+  overflow: hidden;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;}
+.form .gender {
+  width:410px;
+  }
+.form input.buttom{ background: rgba(0, 0, 51, 0.7); display: inline-block; padding: 5px 10px 6px; color: #e2e2e2; text-decoration: none; font-weight: bold; line-height: 1.25; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; border: none; position: relative; cursor: pointer; font-size: 20px; font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; left:38.5%;}
+.form input.buttom:hover	{ background-color: rgba(0, 0, 51, 0.5); }

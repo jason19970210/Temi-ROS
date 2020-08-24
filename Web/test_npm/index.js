@@ -48,15 +48,29 @@ const mqtt_topic = 'test/+'
 //  開機自動化轉埠
 //  https://kawsing.gitbook.io/opensystem/docker-cong-an-zhuang-dao-ying-yong-ru-men-pian/qi-yong-host-ji-de-etcrc.local
 
-var privateKey  = fs.readFileSync(__dirname + '/ssl/private.key');
-var certificate = fs.readFileSync(__dirname + '/ssl/certificate.crt');
-var credentials = { key: privateKey, cert: certificate };
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/chain.pem', 'utf8');
+
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
 
 //var web_server = app.listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
 var web_server = https.createServer(credentials, app).listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
 
-//var http = require('http');
-//http.createServer(app).listen(80);
+
+// https://stackoverflow.com/questions/7450940/automatic-https-connection-redirect-with-node-js-express
+// Redirect from http port 80 to https
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);
+
+
 
 var mqtt_client = mqtt.connect(mqtt_host)
 var sio = io.listen(web_server)
@@ -105,19 +119,8 @@ app.get('/', (req, res) => {
     res.render('index')   
 })
 
-app.get('/data', (req, res) => {
-    res.render('data')
-})
-
-
-app.get('/test1', (req, res) => {
-    res.render('test1')
-})
-
-
 
 // API
-
 // =====================
 // GET Method
 app.get('/offline/:sn', function(req, res){
@@ -204,25 +207,9 @@ app.get('/events', (req, res)=>{
 })
 
 
-app.post('/process', function(req, res){
-    console.log(req.body)
-    //console.log(file)
-})
-
 // =====================
 // POST Method
 // Express Post Method get query from client & send response back to client
-/*
-app.post('/api', (req, res) => {
-    console.log(req.query)
-    //res.send("OK")
-    var user_id = req.query.id;
-    var token = req.query.token;
-    var geo = req.query.geo;
-
-    res.send(user_id + ' ' + token + ' ' + geo);
-    //res.send(req.query)
-})*/
 
 
 // IMPORTANT

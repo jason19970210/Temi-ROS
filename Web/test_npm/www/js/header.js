@@ -16,10 +16,10 @@ var header = "<!-- Navigation -->\
                             <a class='nav-link' href='/redis_console.html'>Redis Console</a>\
                         </li>\
                         <li class='nav-item'>\
-                            <a class='nav-link' href='#'>Brand Guide</a>\
+                            <a class='nav-link' href='/brand.html'>Brand Guide</a>\
                         </li>\
                         <li class='nav-item'>\
-                            <a class='nav-link' href='#'>Promotion & Activity</a>\
+                            <a class='nav-link' href='/activity.html'>Promotion & Activity</a>\
                         </li>\
                     </ul>\
                 </div>\
