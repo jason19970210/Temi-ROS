@@ -10,6 +10,15 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Collections;
 import java.util.Calendar;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -25,17 +34,51 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
 import android.hardware.camera2.*;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.jetbrains.annotations.NotNull;
 
 import com.robotemi.sdk.BatteryData;
 import com.robotemi.sdk.Robot;
+import com.robotemi.sdk.TtsRequest;
 import com.robotemi.sdk.listeners.OnRobotReadyListener;
+import com.robotemi.sdk.constants.SdkConstants;
+import com.robotemi.sdk.constants.Utils;
+import com.robotemi.sdk.activitystream.ActivityStreamObject;
+import com.robotemi.sdk.activitystream.ActivityStreamPublishMessage;
+//import com.robotemi.sdk.constants.ContentType;
+import com.robotemi.sdk.constants.SdkConstants;
+//import com.robotemi.sdk.exception.OnSdkExceptionListener;
+//import com.robotemi.sdk.exception.SdkException;
+//import com.robotemi.sdk.face.ContactModel;
+//import com.robotemi.sdk.face.OnFaceRecognizedListener;
+import com.robotemi.sdk.listeners.OnBeWithMeStatusChangedListener;
+import com.robotemi.sdk.listeners.OnConstraintBeWithStatusChangedListener;
+//import com.robotemi.sdk.listeners.OnDetectionDataChangedListener;
+import com.robotemi.sdk.listeners.OnDetectionStateChangedListener;
+import com.robotemi.sdk.listeners.OnGoToLocationStatusChangedListener;
+import com.robotemi.sdk.listeners.OnLocationsUpdatedListener;
+//import com.robotemi.sdk.listeners.OnRobotLiftedListener;
+import com.robotemi.sdk.listeners.OnRobotReadyListener;
+import com.robotemi.sdk.listeners.OnTelepresenceEventChangedListener;
+import com.robotemi.sdk.listeners.OnUserInteractionChangedListener;
+import com.robotemi.sdk.model.CallEventModel;
+//import com.robotemi.sdk.model.DetectionData;
+//import com.robotemi.sdk.navigation.listener.OnCurrentPositionChangedListener;
+//import com.robotemi.sdk.navigation.listener.OnDistanceToLocationChangedListener;
+//import com.robotemi.sdk.navigation.model.Position;
+//import com.robotemi.sdk.navigation.model.SafetyLevel;
+//import com.robotemi.sdk.navigation.model.SpeedLevel;
+//import com.robotemi.sdk.permission.OnRequestPermissionResultListener;
+import com.robotemi.sdk.permission.Permission;
+
 
 // NodeJS Port : 3000
 // MQTT Port : 1883
@@ -43,10 +86,12 @@ import com.robotemi.sdk.listeners.OnRobotReadyListener;
 // Redis Webadmin Port : 8085
 // arangoDB Webadmin Port : 8529
 
-public class MainActivity extends AppCompatActivity implements OnRobotReadyListener {
+public class MainActivity extends AppCompatActivity implements OnRobotReadyListener, OnGoToLocationStatusChangedListener, OnLocationsUpdatedListener {
 
     private static final String TAG = "data";
     private static final String TAG_Life = "life_cycle";
+
+    private List<String> locations;
     private static Robot robot;
 
     private static Context context;
@@ -56,6 +101,9 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         super.onStart();
         Log.d(TAG_Life, "onStart() function");
         robot.addOnRobotReadyListener(this);
+        robot.addOnRobotReadyListener(this);
+        robot.addOnGoToLocationStatusChangedListener(this);
+        robot.addOnLocationsUpdatedListener(this);
         robot.showTopBar();
     }
 
@@ -92,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         setContentView(R.layout.activity_main);
         Log.d(TAG_Life, "onCreate() function");
 
+
         // Keep the screen on
         // https://developer.android.com/training/scheduling/wakelock
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -127,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
 
         robot = Robot.getInstance();
-
 
 
         // Make app running specified function in a period
@@ -172,6 +220,38 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         publishUtilTOMqtt(msg);
     }
 
+    @Override
+    public void onGoToLocationStatusChanged(@NotNull String location, String status, int descriptionId, @NotNull String description) {
+        Log.d("GoToStatusChanged", "status=" + status + ", descriptionId=" + descriptionId + ", description=" + description);
+        robot.speak(TtsRequest.create(description, false));
+        switch (status) {
+            case OnGoToLocationStatusChangedListener.START:
+                robot.speak(TtsRequest.create("Starting", false));
+                break;
+
+            case OnGoToLocationStatusChangedListener.CALCULATING:
+                robot.speak(TtsRequest.create("Calculating", false));
+                break;
+
+            case OnGoToLocationStatusChangedListener.GOING:
+                robot.speak(TtsRequest.create("Going", false));
+                break;
+
+            case OnGoToLocationStatusChangedListener.COMPLETE:
+                robot.speak(TtsRequest.create("Completed", false));
+                break;
+
+            case OnGoToLocationStatusChangedListener.ABORT:
+                robot.speak(TtsRequest.create("Cancelled", false));
+                break;
+        }
+    }
+
+    @Override
+    public void onLocationsUpdated(@NotNull List<String> locations) {
+        //Saving or deleting a location will update the list.
+        Toast.makeText(this, "Locations updated :\n" + locations, Toast.LENGTH_LONG).show();
+    }
 
 
     // https://stackoverflow.com/questions/2832472/how-to-return-2-values-from-a-java-method
