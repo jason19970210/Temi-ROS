@@ -277,4 +277,10 @@ def urlsafe_base64_encode(s):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=False, port=5001, threaded=True, ssl_context=('ssl/certificate.crt', 'ssl/private.key'))
+    app.run(host="0.0.0.0", debug=True, port=5001, threaded=True, ssl_context=('ssl/cert.pem', 'ssl/privkey.pem'))
+
+
+
+#const privateKey = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/privkey.pem', 'utf8');
+#const certificate = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/cert.pem', 'utf8');
+#const ca = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/chain.pem', 'utf8');

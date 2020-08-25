@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "cgutemi",
+            "script": "sudo npm",
+            "args" : "start"
+        }
+    ]
+}

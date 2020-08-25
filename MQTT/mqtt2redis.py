@@ -5,8 +5,8 @@ import redis
 
 ## Redis Connection
 
-r0 = redis.StrictRedis(host='120.126.16.92', port=6379, db=0)
-r1 = redis.StrictRedis(host='120.126.16.92', port=6379, db=1)
+r0 = redis.StrictRedis(host='120.126.16.92', port=55555, db=0)
+r1 = redis.StrictRedis(host='120.126.16.92', port=55555, db=1)
 #r.set("key", "value")
 #print(r.get("key"))
 #time.sleep(20)
