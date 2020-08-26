@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
         robot = Robot.getInstance();
 
-        goTo();
+        //goTo();
 
 
 
@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
                 // 在此處新增執行的程式碼
                 //pubUtils();
 
+                //goTo();
                 handler.postDelayed(this, time);// time ms後執行this,即runable
             }
         };
@@ -199,13 +200,16 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
     //public void goTo(View view) {
     public void goTo() {
-        for (String location : robot.getLocations()) {
-            Log.d("location", location);
+        Log.d("location", "goTo()");
+        locations = robot.getLocations();
+        Log.d("Location", locations.toString());
+//        for (String location : robot.getLocations()) {
+//            Log.d("location", location);
 //            if (location.equals(etGoTo.getText().toString().toLowerCase().trim())) {
 //                robot.goTo(etGoTo.getText().toString().toLowerCase().trim());
 //                hideKeyboard(MainActivity.this);
 //            }
-        }
+//        }
     }
 
 
