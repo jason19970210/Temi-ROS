@@ -86,12 +86,12 @@ import com.robotemi.sdk.permission.Permission;
 // Redis Webadmin Port : 8085
 // arangoDB Webadmin Port : 8529
 
-public class MainActivity extends AppCompatActivity implements OnRobotReadyListener, OnGoToLocationStatusChangedListener, OnLocationsUpdatedListener {
+public class MainActivity extends AppCompatActivity implements OnRobotReadyListener {
 
     private static final String TAG = "data";
     private static final String TAG_Life = "life_cycle";
 
-    private List<String> locations;
+    List<String> locations;
     private static Robot robot;
 
     private static Context context;
@@ -101,9 +101,8 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         super.onStart();
         Log.d(TAG_Life, "onStart() function");
         robot.addOnRobotReadyListener(this);
-        robot.addOnRobotReadyListener(this);
-        robot.addOnGoToLocationStatusChangedListener(this);
-        robot.addOnLocationsUpdatedListener(this);
+//        robot.addOnGoToLocationStatusChangedListener(this);
+//        robot.addOnLocationsUpdatedListener(this);
         robot.showTopBar();
     }
 
@@ -128,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
                 final ActivityInfo activityInfo = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
                 // Robot.getInstance().onStart() method may change the visibility of top bar.
                 robot.onStart(activityInfo);
+
+
             } catch (PackageManager.NameNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -140,11 +141,9 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         setContentView(R.layout.activity_main);
         Log.d(TAG_Life, "onCreate() function");
 
-
         // Keep the screen on
         // https://developer.android.com/training/scheduling/wakelock
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
 
         // Static way to get 'Context' on Android?
         // https://bibby1101.pixnet.net/blog/post/62556473-%3Candroid%3E-static-way-to-get-%27context%27-on-android%3F
@@ -153,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
         Log.d("Name", "Name");
         Log.d("Name", getDeviceName());
-
 
         // Main
 
@@ -177,6 +175,9 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
         robot = Robot.getInstance();
 
+        goTo();
+
+
 
         // Make app running specified function in a period
         // https://www.itread01.com/p/1358274.html
@@ -186,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
             @Override
             public void run() {
                 // 在此處新增執行的程式碼
-                pubUtils();
+                //pubUtils();
 
                 handler.postDelayed(this, time);// time ms後執行this,即runable
             }
@@ -194,6 +195,18 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         handler.postDelayed(runnable, time);// 開啟定時器,time ms後執行runnable操作
 
     } // end of onCreate()
+
+
+    //public void goTo(View view) {
+    public void goTo() {
+        for (String location : robot.getLocations()) {
+            Log.d("location", location);
+//            if (location.equals(etGoTo.getText().toString().toLowerCase().trim())) {
+//                robot.goTo(etGoTo.getText().toString().toLowerCase().trim());
+//                hideKeyboard(MainActivity.this);
+//            }
+        }
+    }
 
 
     public static Context getAppContext() {
@@ -220,38 +233,7 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         publishUtilTOMqtt(msg);
     }
 
-    @Override
-    public void onGoToLocationStatusChanged(@NotNull String location, String status, int descriptionId, @NotNull String description) {
-        Log.d("GoToStatusChanged", "status=" + status + ", descriptionId=" + descriptionId + ", description=" + description);
-        robot.speak(TtsRequest.create(description, false));
-        switch (status) {
-            case OnGoToLocationStatusChangedListener.START:
-                robot.speak(TtsRequest.create("Starting", false));
-                break;
 
-            case OnGoToLocationStatusChangedListener.CALCULATING:
-                robot.speak(TtsRequest.create("Calculating", false));
-                break;
-
-            case OnGoToLocationStatusChangedListener.GOING:
-                robot.speak(TtsRequest.create("Going", false));
-                break;
-
-            case OnGoToLocationStatusChangedListener.COMPLETE:
-                robot.speak(TtsRequest.create("Completed", false));
-                break;
-
-            case OnGoToLocationStatusChangedListener.ABORT:
-                robot.speak(TtsRequest.create("Cancelled", false));
-                break;
-        }
-    }
-
-    @Override
-    public void onLocationsUpdated(@NotNull List<String> locations) {
-        //Saving or deleting a location will update the list.
-        Toast.makeText(this, "Locations updated :\n" + locations, Toast.LENGTH_LONG).show();
-    }
 
 
     // https://stackoverflow.com/questions/2832472/how-to-return-2-values-from-a-java-method
