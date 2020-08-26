@@ -181,15 +181,15 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
         // Make app running specified function in a period
         // https://www.itread01.com/p/1358274.html
-        final int time = 1000  ; // set period time (ms)
+        final int time = 5000  ; // set period time (ms)
         final Handler handler = new Handler();
         Runnable runnable = new Runnable(){
             @Override
             public void run() {
                 // 在此處新增執行的程式碼
                 //pubUtils();
-
-                //goTo();
+                locations = robot.getLocations();
+                goTo(locations.get(1));
                 handler.postDelayed(this, time);// time ms後執行this,即runable
             }
         };
@@ -199,10 +199,12 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
 
     //public void goTo(View view) {
-    public void goTo() {
+    public void goTo(String loc) {
         Log.d("location", "goTo()");
-        locations = robot.getLocations();
-        Log.d("Location", locations.toString());
+
+        //Log.d("Location", locations.toString());
+        //Log.d("Location", locations.get(1));
+        robot.goTo(loc);
 //        for (String location : robot.getLocations()) {
 //            Log.d("location", location);
 //            if (location.equals(etGoTo.getText().toString().toLowerCase().trim())) {
