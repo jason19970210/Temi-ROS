@@ -66,6 +66,13 @@ Sportswear"
         android:textSize="40px"
         android:typeface="normal" />
 
+    <ImageView
+        android:layout_width="74dp"
+        android:layout_height="62dp"
+        android:layout_x="492dp"
+        android:layout_y="353dp"
+        android:src="@drawable/sport" />
+
     <Button
         android:id="@+id/bt3"
         android:layout_width="190dp"
@@ -79,6 +86,13 @@ Sportswear"
 Fashion Chic"
         android:textSize="40px"
         android:typeface="normal"/>
+
+    <ImageView
+        android:layout_width="74dp"
+        android:layout_height="62dp"
+        android:layout_x="792dp"
+        android:layout_y="353dp"
+        android:src="@drawable/eyeglasses" />
 
     <Button
         android:id="@+id/bt4"
@@ -94,6 +108,14 @@ Costmetic\n
 Health"
         android:textSize="40px"
         android:typeface="normal"/>
+
+
+    <ImageView
+        android:layout_width="74dp"
+        android:layout_height="62dp"
+        android:layout_x="1095dp"
+        android:layout_y="355dp"
+        android:src="@drawable/cosmetic" />
 
     <TextView
         android:id="@+id/main"
@@ -120,6 +142,13 @@ Kids"
         android:textSize="40px"
         android:typeface="normal"/>
 
+    <ImageView
+        android:layout_width="73dp"
+        android:layout_height="68dp"
+        android:layout_x="196dp"
+        android:layout_y="577dp"
+        android:src="@drawable/toy" />
+
     <Button
         android:id="@+id/bt6"
         android:layout_width="190dp"
@@ -133,6 +162,13 @@ Kids"
 Food / Drink"
         android:textSize="38px"
         android:typeface="normal"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="56dp"
+        android:layout_x="506dp"
+        android:layout_y="585dp"
+        android:src="@drawable/knifeandfork" />
 
     <Button
         android:id="@+id/bt7"
@@ -149,6 +185,13 @@ Life"
         android:textSize="33px"
         android:typeface="normal"/>
 
+    <ImageView
+        android:layout_width="74dp"
+        android:layout_height="66dp"
+        android:layout_x="795dp"
+        android:layout_y="585dp"
+        android:src="@drawable/game" />
+
     <Button
         android:id="@+id/bt8"
         android:layout_width="190dp"
@@ -161,6 +204,13 @@ Life"
         android:text="義大時尚街"
         android:textSize="40px"
         android:typeface="normal"/>
+
+    <ImageView
+        android:layout_width="74dp"
+        android:layout_height="66dp"
+        android:layout_x="1094dp"
+        android:layout_y="581dp"
+        android:src="@drawable/mall" />
 
     <Button
         android:id="@+id/bt1"
@@ -175,6 +225,13 @@ Life"
 Luxury Chic"
         android:textSize="40px"
         android:typeface="normal" />
+
+    <ImageView
+        android:layout_width="63dp"
+        android:layout_height="59dp"
+        android:layout_x="197dp"
+        android:layout_y="347dp"
+        android:src="@drawable/bag" />
 
     <ImageView
         android:layout_width="402dp"
