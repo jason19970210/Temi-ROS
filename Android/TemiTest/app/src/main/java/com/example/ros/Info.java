@@ -23,6 +23,10 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import com.robotemi.sdk.Robot;
+
+import java.util.List;
+
 public class Info extends Page{
 
     private TextView txtName;
@@ -36,11 +40,16 @@ public class Info extends Page{
     private LinearLayout lay;
     private ImageView btGoto;
 
+    List<String> locations;
+    private static Robot robot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+        locations = robot.getLocations();
 
         Bundle bundle1 = this.getIntent().getExtras();
         final String Logo = bundle1.getString("Logo");
@@ -126,7 +135,7 @@ public class Info extends Page{
                 btGoto.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        
+                        Log.d("location_list", String.valueOf(locations.size()));
                     }
                 }, 290);
             }

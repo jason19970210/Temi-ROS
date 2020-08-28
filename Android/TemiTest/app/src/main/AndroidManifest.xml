@@ -43,6 +43,7 @@
         <meta-data
             android:name="@string/metadata_skill"
             android:value="@string/app_name" />
+        <!-- Make App running on the Home Page -->
         <meta-data
             android:name="com.robotemi.sdk.metadata.KIOSK"
             android:value="true" />
