@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@drawable/dmback"
+    android:radius="30dp"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/btCancel"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_x="1169dp"
+        android:layout_y="37dp"
+        android:background="@mipmap/cancel" />
+
+    <LinearLayout
+        android:id="@+id/lay"
+        android:layout_width="807dp"
+        android:layout_height="95dp"
+        android:layout_x="127dp"
+        android:layout_y="535dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="403dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:text="　　　 （詳見QRcode）"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtOpenTime"
+        android:layout_width="805dp"
+        android:layout_height="wrap_content"
+        android:layout_x="127dp"
+        android:layout_y="630dp"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageBig"
+        android:layout_width="700dp"
+        android:layout_height="360dp"
+        android:layout_x="449dp"
+        android:layout_y="106dp"
+
+        android:background="@drawable/bd_circle_shape"
+        android:src="@drawable/bd_circle_shape" />
+
+    <ImageView
+        android:id="@+id/imageQRcode"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_x="951dp"
+        android:layout_y="505dp"
+        android:background="@mipmap/loading_pic"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/imageLogo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_x="127dp"
+        android:layout_y="160dp"
+        android:background="@drawable/bd_circle_shape"
+        android:scaleType="fitCenter" />
+
+    <ImageView
+        android:id="@+id/imageBackground"
+        android:layout_width="1150dp"
+        android:layout_height="670dp"
+        android:layout_x="65dp"
+        android:layout_y="67dp"
+        android:alpha="0.9"
+        android:background="@drawable/bd_circle_shape"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/btGoto"
+        android:layout_width="157dp"
+        android:layout_height="86dp"
+        android:layout_x="175dp"
+        android:layout_y="430dp"
+        android:foreground="@drawable/btgoto"
+        tools:src="@drawable/circle" />
+
+</AbsoluteLayout>

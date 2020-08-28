@@ -86,10 +86,12 @@ import com.robotemi.sdk.permission.Permission;
 // Redis Webadmin Port : 8085
 // arangoDB Webadmin Port : 8529
 
-public class MainActivity extends AppCompatActivity implements OnRobotReadyListener {
+public class MainActivity extends AppCompatActivity implements OnRobotReadyListener, OnGoToLocationStatusChangedListener {
 
     private static final String TAG = "data";
     private static final String TAG_Life = "life_cycle";
+
+    int i = 0;
 
     List<String> locations;
     private static Robot robot;
@@ -181,7 +183,8 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
 
         // Make app running specified function in a period
         // https://www.itread01.com/p/1358274.html
-        final int time = 5000  ; // set period time (ms)
+        final int time = 10000  ; // set period time (ms)
+
         final Handler handler = new Handler();
         Runnable runnable = new Runnable(){
             @Override
@@ -189,7 +192,20 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
                 // 在此處新增執行的程式碼
                 //pubUtils();
                 locations = robot.getLocations();
-                goTo(locations.get(1));
+                //goTo(locations.get(1));
+                Log.d("locations", locations.toString());
+
+                //robot.goTo(locations.get(i));
+
+                if(i < locations.size()){
+                    i++;
+                } else {
+                    i--;
+                }
+
+                //Log.d("location", String.valueOf(i));
+                //Log.d("location", locations.get(i));
+
                 handler.postDelayed(this, time);// time ms後執行this,即runable
             }
         };
@@ -202,9 +218,10 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
     public void goTo(String loc) {
         Log.d("location", "goTo()");
 
+
         //Log.d("Location", locations.toString());
         //Log.d("Location", locations.get(1));
-        robot.goTo(loc);
+        //robot.goTo(loc);
 //        for (String location : robot.getLocations()) {
 //            Log.d("location", location);
 //            if (location.equals(etGoTo.getText().toString().toLowerCase().trim())) {
@@ -239,7 +256,10 @@ public class MainActivity extends AppCompatActivity implements OnRobotReadyListe
         publishUtilTOMqtt(msg);
     }
 
+    @Override
+    public void onGoToLocationStatusChanged(@NotNull String s, @NotNull String s1, int i, @NotNull String s2) {
 
+    }
 
 
     // https://stackoverflow.com/questions/2832472/how-to-return-2-values-from-a-java-method
