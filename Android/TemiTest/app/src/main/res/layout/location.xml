@@ -63,7 +63,8 @@
         android:background="@drawable/btw1"
         android:text="運動休閒\n
 Sportswear"
-        android:textSize="40px" />
+        android:textSize="40px"
+        android:typeface="normal" />
 
     <Button
         android:id="@+id/bt3"
@@ -76,7 +77,8 @@ Sportswear"
         android:background="@drawable/btw3"
         android:text="流行品牌\n
 Fashion Chic"
-        android:textSize="40px" />
+        android:textSize="40px"
+        android:typeface="normal"/>
 
     <Button
         android:id="@+id/bt4"
@@ -90,7 +92,8 @@ Fashion Chic"
         android:text="美妝保養\n
 Costmetic\n
 Health"
-        android:textSize="40px" />
+        android:textSize="40px"
+        android:typeface="normal"/>
 
     <TextView
         android:id="@+id/main"
@@ -114,7 +117,8 @@ Health"
         android:background="@drawable/btw7"
         android:text="歡樂兒童\n
 Kids"
-        android:textSize="40px" />
+        android:textSize="40px"
+        android:typeface="normal"/>
 
     <Button
         android:id="@+id/bt6"
@@ -127,7 +131,8 @@ Kids"
         android:background="@drawable/btw5"
         android:text="美食饗宴\n
 Food / Drink"
-        android:textSize="38px" />
+        android:textSize="38px"
+        android:typeface="normal"/>
 
     <Button
         android:id="@+id/bt7"
@@ -141,7 +146,8 @@ Food / Drink"
         android:text="娛樂生活
 Entertainment\n
 Life"
-        android:textSize="33px" />
+        android:textSize="33px"
+        android:typeface="normal"/>
 
     <Button
         android:id="@+id/bt8"
@@ -153,7 +159,8 @@ Life"
         android:alpha="0.9"
         android:background="@drawable/btw6"
         android:text="義大時尚街"
-        android:textSize="40px" />
+        android:textSize="40px"
+        android:typeface="normal"/>
 
     <Button
         android:id="@+id/bt1"
