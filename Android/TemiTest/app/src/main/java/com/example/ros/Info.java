@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.view.ViewCompat;
 
@@ -49,6 +50,7 @@ public class Info extends Page{
         setContentView(R.layout.info);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
+        robot = Robot.getInstance();
         locations = robot.getLocations();
 
         Bundle bundle1 = this.getIntent().getExtras();
@@ -136,6 +138,12 @@ public class Info extends Page{
                     @Override
                     public void run() {
                         Log.d("location_list", String.valueOf(locations.size()));
+                        Log.d("location_list", StoreID);
+                        if(locations.contains(StoreID)){
+                            robot.goTo(StoreID);
+                        } else {
+                            Toast.makeText(getApplicationContext(),"地圖資料未建立",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }, 290);
             }
