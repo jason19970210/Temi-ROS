@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_x="46dp"
         android:layout_y="61dp"
-        android:text="Welcome to E-Da OUTLET MALL"
+        android:text="Welcome to E-DA OUTLET MALL"
         android:textColor="#1C0958"
         android:textSize="85px"
         android:textStyle="bold" />
