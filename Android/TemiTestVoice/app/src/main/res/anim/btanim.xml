@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scale xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="300"
+    android:fromXScale="0.95"
+    android:fromYScale="0.95"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:toXScale="1"
+    android:toYScale="1"
+    android:fillAfter="true">
+    <!--duration:动画时长-->
+    <!--fromXScale，fromYScale的起始-->
+    <!--toXScale，toYScale的结束-->
+    <!--pivotX，pivotY 缩放位置，百分比以自身缩放，数值以屏幕像素缩放-->
+</scale>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3DBD5"
+    tools:context=".MainActivity"
+    android:radius="30dp">
+
+    <Button
+        android:id="@+id/bt3"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_centerInParent="true"
+        android:layout_x="663dp"
+        android:layout_y="266dp"/>
+
+    <Button
+        android:id="@+id/bt4"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_centerInParent="true"
+        android:layout_x="957dp"
+        android:layout_y="271dp" />
+
+    <TextView
+        android:id="@+id/main"
+        android:layout_width="564dp"
+        android:layout_height="wrap_content"
+        android:layout_x="39dp"
+        android:layout_y="88dp"
+        android:text="流行品牌 Fashion Chic"
+        android:textColor="#1C0958"
+        android:textSize="85px"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/bt2"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_centerInParent="true"
+        android:layout_x="369dp"
+        android:layout_y="269dp" />
+
+    <Button
+        android:id="@+id/bt1"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_centerInParent="true"
+        android:layout_x="69dp"
+        android:layout_y="268dp" />
+
+    <TextView
+        android:id="@+id/pagebtn"
+        android:layout_width="117dp"
+        android:layout_height="69dp"
+        android:layout_x="1029dp"
+        android:layout_y="117dp"
+        android:gravity="center"
+        android:text="上一頁 Last Page"
+        android:textColor="#8377AC"
+        android:textSize="36px" />
+
+    <TextView
+        android:id="@+id/homebtn"
+        android:layout_width="107dp"
+        android:layout_height="57dp"
+        android:layout_x="1151dp"
+        android:layout_y="118dp"
+        android:gravity="center"
+        android:text="回首頁 Home Page"
+        android:textColor="#8377AC"
+        android:textSize="36px" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btHome"
+        android:layout_width="73dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="4dp"
+        android:layout_x="1169dp"
+        android:layout_y="17dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/home"
+        app:layout_constraintBottom_toTopOf="@+id/homebtn" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btBack"
+        android:layout_width="73dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="4dp"
+        android:layout_x="1052dp"
+        android:layout_y="21dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/last"
+        app:layout_constraintBottom_toTopOf="@+id/homebtn" />
+
+    <ImageView
+        android:layout_width="402dp"
+        android:layout_height="200dp"
+        android:layout_x="865dp"
+        android:layout_y="626dp"
+        android:src="@mipmap/eda_foreground" />
+
+    <View
+        android:layout_width="432dp"
+        android:layout_height="5dp"
+        android:layout_x="51dp"
+        android:layout_y="157dp"
+        android:background="#B4A5C6" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btR"
+        android:layout_width="73dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="4dp"
+        android:layout_x="1109dp"
+        android:layout_y="573dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/arrow_r_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/homebtn" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btL"
+        android:layout_width="73dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="4dp"
+        android:layout_x="64dp"
+        android:layout_y="573dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/arrow_l_foreground"
+        app:layout_constraintBottom_toTopOf="@+id/homebtn" />
+</AbsoluteLayout>

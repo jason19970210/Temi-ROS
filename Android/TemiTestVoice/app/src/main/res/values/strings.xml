@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Temi</string>
+
+    <string name="discount_welfare">品牌優惠</string>
+    <string name="interact_game">互動遊戲</string>
+    <string name="main_location">櫃位導引</string>
+    <string name="event">活動快訊</string>
+    <string name="main_discount">折扣優惠</string>
+    <string name="special_event">特別活動</string>
+    <string name="DM">當季DM</string>
+    <string name="t1">時尚精品 Luxury Chic</string>
+    <string name="t2">運動休閒 Sportswear</string>
+    <string name="t3">流行品牌 Fashion Chic</string>
+    <string name="t4">美妝保養Costmetic\Health</string>
+    <string name="t5">歡樂兒童 Kids</string>
+    <string name="t6">美食饗宴 Food\Drink</string>
+    <string name="t7">娛樂生活 Entertainment\Life</string>
+    <string name="t8">義大時尚街</string>
+    <string name="main_word">Welcome to E-Da OUTLET MALL</string>
+    <string name="service">專人協助 Customer Service</string>
+    <string name="last_page">上一頁 Last Page</string>
+    <string name="home">回首頁 Home Page</string>
+    <string name="mid">/</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bgcolor">#E3DBD5</color>
+    <color name="mainwordcolor">#1C0958</color>
+    <color name="keywordcolor">#8377AC</color>
+    <color name="btnwordcolor">#DB7093</color>
+    <color name="white">#FFFFFF</color>
+</resources>

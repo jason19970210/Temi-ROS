@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dmback"
+    android:animateLayoutChanges="true">
+
+    <TextView
+        android:id="@+id/pagebtn2"
+        android:layout_width="117dp"
+        android:layout_height="69dp"
+        android:layout_x="1128dp"
+        android:layout_y="99dp"
+        android:alpha="0.5"
+        android:gravity="center"
+        android:text="上一頁 Last Page"
+        android:textColor="@color/white"
+        android:textSize="36px" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btL"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_x="0dp"
+        android:layout_y="390dp"
+        android:background="@drawable/arrow_lll" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btR"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_x="1160dp"
+        android:layout_y="390dp"
+        android:background="@drawable/arrow_rrr" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btBack"
+        android:layout_width="73dp"
+        android:layout_height="wrap_content"
+        android:layout_x="1150dp"
+        android:layout_y="19dp"
+        android:alpha="0.5"
+        android:background="@drawable/lastt" />
+
+    <ImageView
+        android:id="@+id/imageDM"
+        android:layout_width="555dp"
+        android:layout_height="match_parent"
+        android:layout_x="368dp"
+        android:layout_y="0dp"
+        android:background="@color/bgcolor"
+        tools:srcCompat="@drawable/page_1" />
+
+    <ImageView
+        android:id="@+id/imageQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="1045dp"
+        android:layout_y="585dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="1040dp"
+        android:layout_y="539dp"
+        android:text="DM帶著走"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="960dp"
+        android:layout_y="104dp"
+        android:alpha="0.2"
+        android:textColor="@color/white"
+        android:textSize="250sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtthis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="59dp"
+        android:layout_y="104dp"
+        android:alpha="0.2"
+        android:textColor="@color/white"
+        android:textSize="250sp"
+        android:textStyle="bold" />
+
+</AbsoluteLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2110893292/TemiTest.iml" filepath="$PROJECT_DIR$/.idea/modules/-2110893292/TemiTest.iml" group="TemiTest" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TemiTest-app.iml" filepath="$PROJECT_DIR$/.idea/modules/TemiTest-app.iml" group="TemiTest/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1598561466/TemiTestVoice-TemiTest.iml" filepath="$PROJECT_DIR$/.idea/modules/1598561466/TemiTestVoice-TemiTest.iml" group="TemiTest" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="TemiTest/app" />
+    </modules>
+  </component>
+</project>

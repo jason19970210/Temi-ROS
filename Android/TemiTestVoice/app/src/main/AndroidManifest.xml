@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ros">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        android:hardwareAccelerated="true"
+        >
+
+        <!--android:theme="@style/AppTheme.NoActionBar"-->
+        <!--android:theme="@style/AppTheme">-->
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Location"/>
+        <activity android:name=".Brand"/>
+        <activity android:name=".Event"/>
+        <activity android:name=".Discount"/>
+        <activity android:name=".Story"/>
+        <activity android:name=".Game"/>
+        <activity android:name=".Success"/>
+        <activity android:name=".Failed"/>
+        <activity android:name=".Info"/>
+        <activity android:name=".Dm"/>
+        <activity android:name=".Information"/>
+        <activity android:name=".InfoAct"/>
+
+        <!-- Mqtt Service -->
+        <service android:name="org.eclipse.paho.android.service.MqttService"></service>
+
+        <meta-data
+            android:name="@string/metadata_skill"
+            android:value="@string/app_name" />
+        <!-- Make App running on the Home Page -->
+        <meta-data
+            android:name="com.robotemi.sdk.metadata.KIOSK"
+            android:value="true" />
+
+    </application>
+
+    <!-- WIFI Permission -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <!--<uses-permission android:name="android.permission.WAKE_LOCK" /> -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+</manifest>

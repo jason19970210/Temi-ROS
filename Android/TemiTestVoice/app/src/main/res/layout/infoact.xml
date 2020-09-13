@@ -1,0 +1,59 @@
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/dmback">
+
+
+    <ImageView
+        android:id="@+id/imageBackground3"
+        android:layout_width="1150dp"
+        android:layout_height="670dp"
+        android:layout_x="65dp"
+        android:layout_y="67dp"
+        android:alpha="0.9"
+        android:background="@drawable/bd_circle_shape"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/btCancel3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_x="1169dp"
+        android:layout_y="37dp"
+        android:background="@mipmap/cancel" />
+
+    <ScrollView
+        android:id="@+id/ScrollView"
+        android:layout_width="1091dp"
+        android:layout_height="626dp"
+        android:layout_x="96dp"
+        android:layout_y="90dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iNDEX_PIC_PATH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@mipmap/loading_pic" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:text="-------------------------------------------------------------------------------------------------------------"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</AbsoluteLayout>

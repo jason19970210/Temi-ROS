@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3DBD5"
+    tools:context=".MainActivity"
+    android:radius="30dp">
+
+    <TextView
+        android:id="@+id/main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="46dp"
+        android:layout_y="61dp"
+        android:text="Welcome to E-DA OUTLET MALL"
+        android:textColor="#1C0958"
+        android:textSize="85px"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/btGuide"
+        android:layout_width="330dp"
+        android:layout_height="330dp"
+        android:layout_centerInParent="true"
+        android:layout_x="76dp"
+        android:layout_y="280dp"
+        android:alpha="0.9"
+        android:background="@drawable/btcircle"
+        android:foreground="@drawable/departmentstore" />
+
+    <ImageView
+        android:id="@+id/btDiscount"
+        android:layout_width="330dp"
+        android:layout_height="330dp"
+        android:layout_centerInParent="true"
+        android:layout_x="877dp"
+        android:layout_y="280dp"
+        android:alpha="0.9"
+        android:background="@drawable/btcircle"
+        android:foreground="@drawable/champagne" />
+
+    <ImageView
+        android:id="@+id/btActivity"
+        android:layout_width="330dp"
+        android:layout_height="330dp"
+        android:layout_centerInParent="true"
+        android:layout_x="477dp"
+        android:layout_y="280dp"
+        android:alpha="0.9"
+        android:background="@drawable/btcircle"
+        android:foreground="@drawable/balloon" />
+
+    <ImageView
+        android:layout_width="402dp"
+        android:layout_height="200dp"
+        android:layout_x="865dp"
+        android:layout_y="626dp"
+        android:src="@mipmap/eda_foreground" />
+
+    <View
+        android:layout_width="432dp"
+        android:layout_height="5dp"
+        android:layout_x="51dp"
+        android:layout_y="157dp"
+        android:background="#B4A5C6"/>
+
+</AbsoluteLayout>
