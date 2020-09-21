@@ -128,7 +128,7 @@ public class Info extends Page implements OnGoToLocationStatusChangedListener{
             Log.e("ifF", floor);
         }
         final TtsRequest Intro = TtsRequest.create(Name.trim()+"位於"+Zone+"區"+floor.trim(), false);
-        final TtsRequest Intro2 = TtsRequest.create(Name.trim()+"位於"+Zone+"區"+floor.trim()+"按下立即前往即可位您帶位", false);
+        final TtsRequest Intro2 = TtsRequest.create(Name.trim()+"位於"+Zone+"區"+floor.trim()+"按下立即前往即可帶您前往", false);
 
         if(Zone.equals("A") && Floor.equals("4F")){
             robot.speak(Intro2);
