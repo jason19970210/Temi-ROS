@@ -79,6 +79,8 @@ public class Location extends Page {
         final Button btBack;
         final Button btHome;
 
+
+        // Brand Type
         bt1 = (Button)findViewById(R.id.bt1);
         bt2 = (Button)findViewById(R.id.bt2);
         bt3 = (Button)findViewById(R.id.bt3);

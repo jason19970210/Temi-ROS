@@ -122,6 +122,8 @@ public class Information extends Page {
             e.printStackTrace();
         }
 
+
+        // Scroll to Left
         btL.setOnClickListener(new OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             public void onClick(View v){
@@ -222,6 +224,9 @@ public class Information extends Page {
             }
         });
 
+
+
+        // Scroll to Right
         btR.setOnClickListener(new OnClickListener(){
             public void onClick(View v){
                 setAnimation();

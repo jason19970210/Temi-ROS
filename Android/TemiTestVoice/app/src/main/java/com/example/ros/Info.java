@@ -127,8 +127,8 @@ public class Info extends Page implements OnGoToLocationStatusChangedListener{
             floor = Floor.replace('F', '樓');
             Log.e("ifF", floor);
         }
-        final TtsRequest Intro = TtsRequest.create(Name.trim()+"位於"+Zone+"區"+floor.trim(), false);
-        final TtsRequest Intro2 = TtsRequest.create(Name.trim()+"位於"+Zone+"區"+floor.trim()+"按下立即前往即可帶您前往", false);
+        final TtsRequest Intro = TtsRequest.create(Name.trim()+"位於"+Zone+"區"+floor.trim()+"但我目前無法帶您前往，您可以掃描 QR Code 得到地圖資訊", false);
+        final TtsRequest Intro2 = TtsRequest.create(Name.trim()+"位於"+Zone+"區"+floor.trim()+" 按下立即前往即可帶您前往", false);
 
         if(Zone.equals("A") && Floor.equals("4F")){
             robot.speak(Intro2);
