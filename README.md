@@ -11,7 +11,7 @@
     - Redis Web GUI Console
     - NodeJS
     - Python
-        - Sub MQTT & Write Data into Reids DB
+        - Sub MQTT & Write Data into Redis DB
 - Temi Robot
     - Java
         - MQTT Client
