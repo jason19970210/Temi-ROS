@@ -51,7 +51,7 @@
         stop-writes-on-bgsave-error no
         ```
 
-- NoeJS
+- NodeJS
     - Node & NPM
         ```zsh
         $ sudo apt update -y && sudo apt install nodejs -y
@@ -83,10 +83,10 @@
             1. Make sure brew is installed
             2. `$ brew cask install android-platform-tools`
         - Mannual
-            1. If installed before, run this command `$ rm -rf ~/.android-sdk-macosx/` to delete privious document
+            1. (Optional) If installed before, run this command `$ rm -rf ~/.android-sdk-macosx/` to delete previous document
             2. Download SDK Platform-Tools
             <https://developer.android.com/studio/releases/platform-tools>
-            3. Add  to environment variables
+            3. Add environment variables
             ```zsh
             $ echo 'export PATH=$PATH:~/.android-sdk-macosx/platform-tools/' >> ~/.bash_profile
             ``` 
@@ -133,13 +133,13 @@
         - Field : Date, Time
             - Value : Data JSON Format
 
-- Table [2] : 櫃位引導
+- Table [2] : 櫃位引導(Brand Guide)
 
     | Brand_ID | Brand_Name | Brand_URL | Brand_Logo | Brand_Description |  Brand_Location | Ask_Counter |
     | ---- | ---- | ---- | ---- | ---- | ---- | ---- | 
     |  |  |  | URL |  |  |  |
 
-- Table [3] : 活動列表
+- Table [3] : 活動列表(Activity List)
 
     | Time | Activity_Name | Provider_ID | ProviderName | DM_Sources | TTL |
     | ---- | ---- | ---- | ---- | ---- | ---- | 
@@ -173,10 +173,7 @@ final Handler handler = new Handler();
 Runnable runnable = new Runnable(){
     @Override
     public void run() {
-        // 在此處新增執行的程式碼
-
-        // TO-DO
-        // Can be a Function
+        // Add function(s) or something eles here
 
         handler.postDelayed(this, time);// time ms後執行this,即runable
     }
@@ -268,6 +265,7 @@ public static void publishUtilTOMqtt(String content){ // Void function without r
 
 ## Domain Name
 - Apply from NCTU free domain : https://nctu.me/
+    - No longer support !! (from 2020/10)
 
 
 
