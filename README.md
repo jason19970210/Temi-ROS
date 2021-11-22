@@ -89,8 +89,16 @@
             3. Add environment variables
             ```zsh
             $ echo 'export PATH=$PATH:~/.android-sdk-macosx/platform-tools/' >> ~/.bash_profile
+            $ echo 'export PATH="$PATH:<PWD>/platform-tools"' >> ~/.zshrc
+            
+            # ex.
+            $ echo 'export PATH="$PATH:$HOME/development/platform-tools"' >> ~/.zshrc
             ``` 
             or change `.bash_profile` to the active shell config such as `zsh` config `.zshrc`
+            4. Source the rc file
+            ```zsh
+            $ source ~/.zshrc
+            ```
 
 - Open Temi ADB Connection Port
     > Settings -> temi Developer Tools -> ADB Port Opening
