@@ -2,7 +2,6 @@
 // Safari : Missing bootstrap.min.js.map
 // Solution : https://www.it-swarm.dev/zh/bootstrap-4/webpack安装bootstrap缺少popperjsmap/835338106/
 
-//const https = require('https');
 const fs = require('fs');
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -12,6 +11,23 @@ const io = require('socket.io')
 const express = require('express')
 const https = require('https');
 const app = express()
+
+const web_host = '0.0.0.0'
+const web_port = 443; //3000
+const mqtt_host = 'tcp://120.126.16.92'
+const mqtt_topic = 'test/+'
+
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/chain.pem', 'utf8');
+
+const credentials = {
+    key: privateKey,
+    cert: certificate,
+    ca: ca
+};
+
+var fake_data = '{"key":"value"}'
 
 
 //app.use(bodyParser.json());
@@ -33,11 +49,6 @@ app.use (function (req, res, next) {
 
 app.set('view engine', 'ejs')
 
-const web_host = '0.0.0.0'
-const web_port = 443; //3000
-const mqtt_host = 'tcp://120.126.16.92'
-const mqtt_topic = 'test/+'
-
 
 //  Domain Management
 //  https://nctu.me/domains/
@@ -48,15 +59,6 @@ const mqtt_topic = 'test/+'
 //  開機自動化轉埠
 //  https://kawsing.gitbook.io/opensystem/docker-cong-an-zhuang-dao-ying-yong-ru-men-pian/qi-yong-host-ji-de-etcrc.local
 
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/cgutemi.nctu.me/chain.pem', 'utf8');
-
-const credentials = {
-	key: privateKey,
-	cert: certificate,
-	ca: ca
-};
 
 //var web_server = app.listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
 var web_server = https.createServer(credentials, app).listen(web_port, web_host, () => console.log("Listening on " + web_host + ":" + web_port + "\n" + "CROS Enabled"))
@@ -80,12 +82,12 @@ mqtt_client.on('connect', function(){
     mqtt_client.subscribe(mqtt_topic)    
 })
 
-var fake_data = '{"key":"value"}'
 
 function sendData(socket){
     socket.emit('mqtt', {'msg': fake_data})
 }
 //console.log(typeof(fake_data))
+
 sio.on('connection', function(socket){
     //console.log("Connected to socket")
     
@@ -98,7 +100,6 @@ sio.on('connection', function(socket){
         //console.log('Get topic: ' + topic + 'with msg: ' + msg.toString())
         socket.emit('mqtt', {'msg': msg.toString()})
     })
-    
     
     setInterval( () => sendData(socket), 1000);
 })
